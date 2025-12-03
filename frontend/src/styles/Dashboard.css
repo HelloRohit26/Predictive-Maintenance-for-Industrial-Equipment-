@@ -1,0 +1,358 @@
+/* styles/Dashboard.css */
+body {
+    background-color: #1a1c2e; /* Dark blue background */
+    color: #e0e0e0; /* Light grey text */
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #33365a;
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #fff;
+}
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.9em;
+}
+.uptime { color: #aaa; }
+.alerts-enabled {
+    background-color: #0a834e;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
+    gap: 20px; /* Spacing between cards */
+}
+
+/* Span items across grid columns */
+.grid-span-2 { grid-column: span 2; }
+.grid-span-3 { grid-column: span 3; }
+.grid-span-4 { grid-column: span 4; } /* If needed for wider elements */
+
+
+/* Basic Card Styling */
+.card {
+    background-color: #252849; /* Darker card background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #a0a3c4; /* Lighter text for headers */
+    font-size: 0.9em;
+}
+.card-header i { font-size: 1.2em; } /* For icons */
+
+.card-title {
+    font-weight: bold;
+}
+
+.card-value {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #fff; /* White for main values */
+    margin-bottom: 10px;
+}
+.card-value.low { color: #4caf50; } /* Green */
+.card-value.medium { color: #ff9800; } /* Orange */
+.card-value.high { color: #f44336; } /* Red */
+.card-value.nan { color: #777; } /* Grey for NaN */
+
+
+.card-subtext {
+    font-size: 0.85em;
+    color: #a0a3c4;
+}
+
+.progress-bar-bg {
+    background-color: #3b4070;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: #e04b5a; /* Red for health example */
+    width: 0%; /* Will be set dynamically */
+    border-radius: 4px;
+    transition: width 0.5s ease-in-out;
+}
+.progress-bar-fill.efficiency {
+     background-color: #4a90e2; /* Blue for efficiency example */
+}
+
+/* Chart Specific */
+.chart-container {
+    height: 300px; /* Adjust as needed */
+    position: relative; /* Needed for chart.js responsiveness */
+}
+
+/* Prediction Specific */
+.risk-level {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.probability-bar-container {
+    width: 100%;
+    height: 10px;
+    background-color: #3b4070;
+    border-radius: 5px;
+    margin-top: 10px;
+    position: relative; /* For text positioning */
+}
+
+.probability-bar-fill {
+    height: 100%;
+    background: linear-gradient(to right, #4caf50, #ffeb3b, #f44336); /* Green-Yellow-Red gradient */
+    border-radius: 5px;
+    width: 0%; /* Set dynamically */
+    transition: width 0.5s ease-in-out;
+}
+.probability-text {
+    position: absolute;
+    right: 5px;
+    top: 15px; /* Position below the bar */
+    font-size: 0.9em;
+    color: #a0a3c4;
+}
+/* Styles for AlertHistory component */
+.alert-history-card {
+    grid-column: span 2; /* Example: Make it span 2 columns, adjust as needed */
+    max-height: 400px; /* Limit height if list gets long */
+    overflow-y: auto;  /* Add scrollbar if content overflows */
+}
+
+.alert-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.alert-item {
+    border-bottom: 1px solid #33365a; /* Separator line */
+    padding: 8px 5px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.alert-item:last-child {
+    border-bottom: none;
+}
+
+.alert-timestamp {
+    color: #a0a3c4; /* Lighter color for timestamp */
+    margin-right: 15px;
+    flex-shrink: 0; /* Prevent timestamp from shrinking too much */
+}
+
+.alert-message {
+    color: #e0e0e0;
+    word-break: break-word; /* Prevent long messages overflowing */
+}
+
+.no-alerts-message {
+     color: #a0a3c4;
+     text-align: center;
+     padding: 20px;
+}
+/* --- Styles for Bigger ML Prediction Stat Card --- */
+
+/* Target the StatCard with the specific class */
+.card.ml-prediction-stat-card {
+    grid-column: span 2; /* Make the card span 2 grid columns instead of 1 */
+    /* You might need to adjust the grid-column span of other cards
+       in this row if they were previously spanning 1 column each,
+       or adjust the number of columns in .dashboard-grid */
+  
+    min-height: 120px; /* Increase minimum height slightly if desired */
+    display: flex; /* Use flexbox for better internal alignment */
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+  }
+  
+  /* Target the value display within the specific card */
+  .card.ml-prediction-stat-card .card-value {
+    font-size: 2.8em; /* Significantly increase the font size of the percentage value */
+    /* You can adjust this value as needed */
+    line-height: 1.2; /* Adjust line height for the larger font */
+    margin-top: 5px; /* Add some space above the value */
+  }
+  
+  /* Optional: Slightly larger title for this card */
+  .card.ml-prediction-stat-card .card-title {
+      font-size: 1.1em;
+      font-weight: 600;
+  }
+  /* --- Styles for Wider Chart and History Cards --- */
+
+/* Assuming your .dashboard-grid is set up like:
+   .dashboard-grid {
+     display: grid;
+     grid-template-columns: repeat(4, 1fr); // Example: 4 equal columns
+     gap: 1rem; // Example gap
+   }
+   Adjust the span values below if your grid has a different number of columns.
+*/
+
+/* Target the wrapper div inside the LiveChart component */
+/* LiveChart likely renders <div class="card grid-span-2">...</div> */
+/* We override the default span */
+.dashboard-grid > div:has(.chart-container) { /* Targets the div containing the chart */
+    grid-column: span 3 !important; /* Make LiveChart span 3 out of 4 columns */
+    /* !important might be needed to override inline or component styles if present */
+  }
+  
+  
+  /* Target the AlertHistory card using its specific class */
+  .card.alert-history-card {
+    grid-column: span 4; /* Make Alert History span all 4 columns */
+  }
+  
+  /* Optional: Ensure ML prediction card still spans 2 if desired */
+  /* You might need to adjust this based on how many items are in Row 2 */
+  .card.ml-prediction-stat-card {
+      grid-column: span 2; /* Keep ML prediction card spanning 2 */
+       /* Add other styles for size if needed, like font-size from previous step */
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+  .card.ml-prediction-stat-card .card-value {
+      font-size: 2.8em;
+      line-height: 1.2;
+      margin-top: 5px;
+  }
+  .card.ml-prediction-stat-card .card-title {
+      font-size: 1.1em;
+      font-weight: 600;
+  }
+  /* --- Styles for AlertHistory component --- */
+
+.alert-history-card {
+    grid-column: span 4; /* Make Alert History span all 4 columns */
+    max-height: 300px; /* Limit height */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column;
+    /* background-color: #2a2d44; Slightly different background if needed */
+  }
+  
+  .alert-history-card .card-header {
+    flex-shrink: 0; /* Prevent header from shrinking */
+  }
+  
+  .alert-list-container {
+    overflow-y: auto;  /* Add scrollbar if content overflows */
+    padding: 5px 15px 15px 15px; /* Padding for the scrollable area */
+    flex-grow: 1; /* Allow container to grow */
+  }
+  
+  .alert-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .alert-item {
+    border-radius: 6px; /* Rounded corners */
+    padding: 10px 15px; /* Padding inside each alert item */
+    margin-bottom: 10px; /* Space between alert items */
+    border: 1px solid transparent; /* Base border */
+    background-color: rgba(255, 255, 255, 0.05); /* Default background */
+    color: #e0e0e0; /* Default text color */
+    font-size: 0.9em;
+  }
+  
+  .alert-item:last-child {
+    margin-bottom: 0; /* No margin below the last item */
+  }
+  
+  /* --- Priority Styles (Based on image colors) --- */
+  
+  .alert-item.priority-high {
+    background-color: rgba(115, 44, 51, 0.5); /* Dark reddish background */
+    border-color: rgba(217, 83, 79, 0.6); /* Reddish border */
+    color: #f2dede; /* Lighter text for contrast */
+  }
+  
+  .alert-item.priority-medium {
+    background-color: rgba(133, 100, 4, 0.5); /* Dark yellowish background */
+    border-color: rgba(240, 173, 78, 0.6); /* Yellowish border */
+    color: #fcf8e3; /* Lighter text for contrast */
+  }
+  
+  .alert-item.priority-normal {
+    /* Optional: Style for non-critical/warning alerts if needed */
+     background-color: rgba(70, 73, 99, 0.5);
+     border-color: rgba(117, 120, 151, 0.6);
+     color: #d9edf7;
+  }
+  
+  .alert-item.priority-unknown {
+    /* Style for alerts where priority couldn't be determined */
+     background-color: rgba(80, 80, 80, 0.5);
+     border-color: rgba(120, 120, 120, 0.6);
+  }
+  
+  
+  /* --- Text lines within alert item --- */
+  .alert-main-line {
+    font-weight: 600; /* Make first line slightly bolder */
+    margin-bottom: 3px;
+  }
+  
+  .alert-sub-line {
+    font-size: 0.9em; /* Make second line slightly smaller */
+    opacity: 0.8; /* Make second line slightly less prominent */
+  }
+  
+  .no-alerts-message {
+     color: #a0a3c4;
+     text-align: center;
+     padding: 20px;
+     margin-top: 20px;
+  }
+  
+  /* --- End AlertHistory Styles --- */
+  
+  
+  /* --- End Layout Styles --- */
+  
+  /* --- End ML Prediction Card Styles --- */
